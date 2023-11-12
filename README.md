@@ -1,5 +1,5 @@
 # BattleshipProject
-Requirements
+Requirements:
 
 Simple text-based interface;
 
