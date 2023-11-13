@@ -6,7 +6,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
 
-        System.out.prigit ntln("  +++++ BATTLESHIP GAME +++++");
+        System.out.println("  +++++ BATTLESHIP GAME +++++");
         System.out.println("   +++++  GET STARTED  +++++");
         System.out.println("     +++++ GAME MODE +++++ \n");
         System.out.println("     1. Player VS Player");
