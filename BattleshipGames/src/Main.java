@@ -14,14 +14,14 @@ public class Main {
         System.out.println("           0. Exit");
         System.out.println();
         String options = input.next();
-        /*switch (options){
-            case "1" :
+        switch (options) {
+            case "1":
 
                 break;
-            case "2" :
+            case "2":
 
                 break;
-            case "0" :
+            case "0":
                 System.out.println("Exiting Game!");
                 input.close();
                 System.exit(0);
@@ -29,7 +29,7 @@ public class Main {
             default:
                 System.out.println("Invalid option, please input correct one");
                 break;
-        }*/
+        }
 
     }
 }
