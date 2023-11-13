@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-
+        Player player1 = new Player();
 
         System.out.println("  +++++ BATTLESHIP GAME +++++");
         System.out.println("   +++++  GET STARTED  +++++");
@@ -16,7 +16,8 @@ public class Main {
         String options = input.next();
         switch (options) {
             case "1":
-
+                player1.createBattleshipBoard();
+                  player1.displayBattleshipBoard();
                 break;
             case "2":
 
