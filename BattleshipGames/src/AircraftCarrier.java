@@ -1,2 +1,2 @@
-public class AircraftCarrier {
+public class AircraftCarrier{
 }

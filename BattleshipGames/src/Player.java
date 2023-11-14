@@ -23,10 +23,9 @@ public class Player {
             System.out.print(letters[row]);
             System.out.print("\t");
             for (int col = 0; col < sizeOfRowsAndColumns; col++) {
-                // Print the emoji and adjust the width of the column
                 System.out.print(boardGame[row][col] + "\t");
             }
-            System.out.println(); // Move to the next line for the next row
+            System.out.println();
         }
     }
 

@@ -1,2 +1,2 @@
-public class Destroyer {
+public class Destroyer{
 }

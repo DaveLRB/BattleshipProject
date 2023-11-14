@@ -16,8 +16,7 @@ public class Main {
         String options = input.next();
         switch (options) {
             case "1":
-                player1.createBattleshipBoard();
-                  player1.displayBattleshipBoard();
+
                 break;
             case "2":
 
