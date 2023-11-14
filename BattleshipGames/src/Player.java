@@ -29,7 +29,11 @@ public class Player {
         }
     }
 
-    public void placeBattleshipHorizontally(Coordinate coordinate) {
+    public String[][] getBoardGame() {
+        return boardGame;
+    }
+
+    /*public void placeBattleshipHorizontally(Coordinate coordinate, Battleship battleship) {
         Battleship.placeShipHorizontally(boardGame, coordinate);
     }
 
@@ -51,5 +55,5 @@ public class Player {
         } else {
             return false;
         }
-    }
+    }*/
 }

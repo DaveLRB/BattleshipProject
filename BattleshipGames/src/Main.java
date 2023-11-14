@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         Player player1 = new Player();
+        Battleship battleship = new Battleship();
 
         Scanner input = new Scanner(System.in);
         System.out.println("  +++++ BATTLESHIP GAME +++++");
@@ -30,14 +31,14 @@ public class Main {
                     System.out.println(coordinate);
                     System.out.println();
                     if (direction.equals("H")) {
-                        isPossible = player1.isPlacingBattleshipHorizontallyPossible(coordinate);
+                        isPossible = battleship.isPlacingShipHorizontallyPossible(player1.getBoardGame(),coordinate);
                     } else {
-                        isPossible = player1.isPlacingBattleshipVerticallyPossible(coordinate);
+                        isPossible = battleship.isPlacingShipVerticallyPossible(player1.getBoardGame(),coordinate);
                     }
                     if (isPossible && direction.equals("H")) {
-                        player1.placeBattleshipHorizontally(coordinate);
+                        battleship.placeShipHorizontally(player1.getBoardGame(),coordinate);
                     } else if (isPossible && direction.equals("V")) {
-                        player1.placeBattleshipVertically(coordinate);
+                        battleship.placeShipVertically(player1.getBoardGame(),coordinate);
                     } else {
                         System.out.println("error, invalid coordinate\n");
                     }
@@ -112,3 +113,4 @@ public class Main {
     }
 
 }
+
