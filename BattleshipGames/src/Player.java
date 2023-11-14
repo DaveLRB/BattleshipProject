@@ -12,10 +12,10 @@ public class Player {
     }
 
     public void displayBattleshipBoard() {
-        char[] letters = {'A','B','C','D','E','F','G','H','I','J'};
+        char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         System.out.print("\t");
-        for(int i = 0; i<10; i++){
-            System.out.print(i+1 + "\t");
+        for (int i = 0; i < 10; i++) {
+            System.out.print(i + 1 + "\t");
         }
         System.out.println();
 
@@ -29,14 +29,15 @@ public class Player {
         }
     }
 
-    public boolean placeBattleshipHorizontally(Coordinate coordinate){
-        if(Battleship.isPlacingShipHorizontallyPossible(boardGame,coordinate)){
-            Battleship.placeShipHorizontally(boardGame,coordinate);
+    public void placeBattleshipHorizontally(Coordinate coordinate) {
+        Battleship.placeShipHorizontally(boardGame, coordinate);
+    }
+
+    public boolean isPlacingBattleshipHorizontallyPossible(Coordinate coordinate) {
+        if (Battleship.isPlacingShipHorizontallyPossible(boardGame, coordinate)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-
-
 }

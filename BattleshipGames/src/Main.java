@@ -18,10 +18,24 @@ public class Main {
             case "1":
                 player1.createBattleshipBoard();
                 player1.displayBattleshipBoard();
-                /*String userCoordinate = getCoordinateInput();
-                int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
-                Coordinate coordinate = new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
-                System.out.println(coordinate);*/
+                System.out.println();
+                System.out.println("Please, place the Battleship/ it occupies 5 coordinates");
+                Coordinate coordinate;
+                boolean isPossible=false;
+                do{
+                    String userCoordinate = getCoordinateInput();
+                    int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
+                    coordinate = new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
+                    System.out.println(coordinate);
+                    System.out.println();
+                    isPossible=player1.isPlacingBattleshipHorizontallyPossible(coordinate);
+                    if(isPossible){
+                        player1.placeBattleshipHorizontally(coordinate);
+                    }else{
+                        System.out.println("error, invalid coordinate\n");
+                    }
+                }while(!isPossible);
+                player1.displayBattleshipBoard();
                 break;
             case "2":
 
