@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        Player player1 = new Player();
+
         Scanner input = new Scanner(System.in);
         System.out.println("  +++++ BATTLESHIP GAME +++++");
         System.out.println("   +++++  GET STARTED  +++++");
@@ -14,10 +16,12 @@ public class Main {
         String options = input.next();
         switch (options) {
             case "1":
-                String userCoordinate = getCoordinateInput();
+                player1.createBattleshipBoard();
+                player1.displayBattleshipBoard();
+                /*String userCoordinate = getCoordinateInput();
                 int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
                 Coordinate coordinate = new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
-                System.out.println(coordinate);
+                System.out.println(coordinate);*/
                 break;
             case "2":
 
