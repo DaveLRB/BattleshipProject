@@ -33,8 +33,20 @@ public class Player {
         Battleship.placeShipHorizontally(boardGame, coordinate);
     }
 
+    public void placeBattleshipVertically(Coordinate coordinate) {
+        Battleship.placeShipVertically(boardGame, coordinate);
+    }
+
     public boolean isPlacingBattleshipHorizontallyPossible(Coordinate coordinate) {
         if (Battleship.isPlacingShipHorizontallyPossible(boardGame, coordinate)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isPlacingBattleshipVerticallyPossible(Coordinate coordinate) {
+        if (Battleship.isPlacingShipVerticallyPossible(boardGame, coordinate)) {
             return true;
         } else {
             return false;

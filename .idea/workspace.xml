@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="615ed208-f638-4338-b757-71c9ecb6864c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BattleshipGames/src/Battleship.java" beforeDir="false" afterPath="$PROJECT_DIR$/BattleshipGames/src/Battleship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BattleshipGames/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/BattleshipGames/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BattleshipGames/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/BattleshipGames/src/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BattleshipProject/Battleship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BattleshipProject/Battleship.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BattleshipProject/BattleshipManager.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BattleshipProject/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BattleshipProject/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/BattleshipProject/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BattleshipProject/Player.class" afterDir="false" />
     </list>
@@ -60,13 +58,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/BattleshipGames/src/Player.java</url>
-          <line>35</line>
-          <properties class="Player" method="isPlacingBattleshipHorizontallyPossible">
+          <url>file://$PROJECT_DIR$/BattleshipGames/src/Battleship.java</url>
+          <line>33</line>
+          <properties class="Battleship" method="isPlacingShipVerticallyPossible">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="5" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

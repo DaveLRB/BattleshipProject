@@ -21,20 +21,27 @@ public class Main {
                 System.out.println();
                 System.out.println("Please, place the Battleship/ it occupies 5 coordinates");
                 Coordinate coordinate;
-                boolean isPossible=false;
-                do{
+                boolean isPossible = false;
+                do {
+                    String direction = getDirectionHorizontalOrVerticalInput();
                     String userCoordinate = getCoordinateInput();
                     int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
                     coordinate = new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
                     System.out.println(coordinate);
                     System.out.println();
-                    isPossible=player1.isPlacingBattleshipHorizontallyPossible(coordinate);
-                    if(isPossible){
+                    if (direction.equals("H")) {
+                        isPossible = player1.isPlacingBattleshipHorizontallyPossible(coordinate);
+                    } else {
+                        isPossible = player1.isPlacingBattleshipVerticallyPossible(coordinate);
+                    }
+                    if (isPossible && direction.equals("H")) {
                         player1.placeBattleshipHorizontally(coordinate);
-                    }else{
+                    } else if (isPossible && direction.equals("V")) {
+                        player1.placeBattleshipVertically(coordinate);
+                    } else {
                         System.out.println("error, invalid coordinate\n");
                     }
-                }while(!isPossible);
+                } while (!isPossible);
                 player1.displayBattleshipBoard();
                 break;
             case "2":
@@ -92,6 +99,16 @@ public class Main {
         String userCoordinateCopy = userCoordinate;
         userCoordinate = userCoordinate.replace("10", "9");
         return !(userCoordinateCopy.equals(userCoordinate));
+    }
+
+    public static String getDirectionHorizontalOrVerticalInput() {
+        Scanner scan = new Scanner(System.in);
+        String chosenDirection;
+        do {
+            System.out.println("Choose direction: [H] Horizontal or [V] Vertical");
+            chosenDirection = scan.nextLine().toUpperCase();
+        } while (!chosenDirection.equals("H") && !chosenDirection.equals("V"));
+        return chosenDirection;
     }
 
 }
