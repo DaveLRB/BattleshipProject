@@ -14,8 +14,9 @@ public class Main {
         String options = input.next();
         switch (options) {
             case "1":
-                new Coordinate();
-                Coordinate coordinate = getCoordinate();
+                String userCoordinate = getCoordinateInput();
+                int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
+                Coordinate coordinate = new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
                 System.out.println(coordinate);
                 break;
             case "2":
@@ -30,12 +31,6 @@ public class Main {
                 System.out.println("Invalid option, please input correct one");
                 break;
         }
-    }
-
-    public static Coordinate getCoordinate(){
-        String userCoordinate = getCoordinateInput();
-        int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
-        return new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
     }
 
     public static String getCoordinateInput() {
@@ -78,7 +73,7 @@ public class Main {
     public static boolean isReplaced(String userCoordinate) {
         String userCoordinateCopy = userCoordinate;
         userCoordinate = userCoordinate.replace("10", "9");
-        return !userCoordinateCopy.equals(userCoordinate);
+        return !(userCoordinateCopy.equals(userCoordinate));
     }
 
 }
