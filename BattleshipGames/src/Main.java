@@ -14,9 +14,8 @@ public class Main {
         String options = input.next();
         switch (options) {
             case "1":
-                String userCoordinate = getCoordinateInput();
-                int[] splittedUserCoordinateInt=turnCoordinateStringToInt(userCoordinate);
-                Coordinate coordinate=new Coordinate(splittedUserCoordinateInt[0],splittedUserCoordinateInt[1]);
+                new Coordinate();
+                Coordinate coordinate = getCoordinate();
                 System.out.println(coordinate);
                 break;
             case "2":
@@ -31,6 +30,12 @@ public class Main {
                 System.out.println("Invalid option, please input correct one");
                 break;
         }
+    }
+
+    public static Coordinate getCoordinate(){
+        String userCoordinate = getCoordinateInput();
+        int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
+        return new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
     }
 
     public static String getCoordinateInput() {
@@ -57,27 +62,23 @@ public class Main {
 
     public static int[] turnCoordinateStringToInt(String userCoordinate) {
         userCoordinate = userCoordinate.trim();
-        if(!isReplaced(userCoordinate)){
+        if (!isReplaced(userCoordinate)) {
             userCoordinate = userCoordinate.replace('1', '0').replace('2', '1').replace('3', '2').replace('4', '3').replace('5', '4').replace('6', '5').replace('7', '6').replace('8', '7').replace('9', '8');
-        }else{
-            userCoordinate = userCoordinate.replace("10","9");
+        } else {
+            userCoordinate = userCoordinate.replace("10", "9");
         }
         userCoordinate = userCoordinate.toLowerCase().replace('a', '0').replace('b', '1').replace('c', '2').replace('d', '3').replace('e', '4').replace('f', '5').replace('g', '6').replace('h', '7').replace('i', '8').replace('j', '9');
         String[] splittedUserCoordinate = userCoordinate.split("");
         int[] userCoordinateInt = new int[2];
-        userCoordinateInt[0] =Integer.parseInt(splittedUserCoordinate[0]);
-        userCoordinateInt[1]=Integer.parseInt(splittedUserCoordinate[1]);
+        userCoordinateInt[0] = Integer.parseInt(splittedUserCoordinate[0]);
+        userCoordinateInt[1] = Integer.parseInt(splittedUserCoordinate[1]);
         return userCoordinateInt;
     }
 
-    public static boolean isReplaced(String userCoordinate){
+    public static boolean isReplaced(String userCoordinate) {
         String userCoordinateCopy = userCoordinate;
-        userCoordinate = userCoordinate.replace("10","9");
-        if(userCoordinateCopy.equals(userCoordinate)){
-            return false;
-        }else{
-            return true;
-        }
+        userCoordinate = userCoordinate.replace("10", "9");
+        return !userCoordinateCopy.equals(userCoordinate);
     }
 
 }
