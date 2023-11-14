@@ -1,4 +1,4 @@
-public class Battleship {
+public class Battleship extends Ship{
 
     public static void shootMissile() {
 
