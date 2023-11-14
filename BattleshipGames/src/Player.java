@@ -29,5 +29,14 @@ public class Player {
         }
     }
 
+    public boolean placeBattleshipHorizontally(Coordinate coordinate){
+        if(Battleship.isPlacingShipHorizontallyPossible(boardGame,coordinate)){
+            Battleship.placeShipHorizontally(boardGame,coordinate);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }
