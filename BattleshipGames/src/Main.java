@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-        Player player1 = new Player();
+
 
         System.out.println("  +++++ BATTLESHIP GAME +++++");
         System.out.println("   +++++  GET STARTED  +++++");
