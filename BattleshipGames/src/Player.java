@@ -8,6 +8,7 @@ public class Player {
                 boardGame[row][col] = "🌊";
             }
         }
+
     }
 
     public void displayBattleshipBoard() {
