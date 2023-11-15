@@ -48,5 +48,6 @@ class GameManager {
             }
         } while (!isPlacementValid);
         player1.displayBattleshipBoard();
+
     }
 }
