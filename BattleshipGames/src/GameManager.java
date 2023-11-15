@@ -94,12 +94,12 @@ class GameManager {
             System.out.println(coordinate);
             System.out.println();
             if (direction.equals("H")) {
-                isPossibleToPlaceShip = player1Battleship.isPlacingShipHorizontallyPossible(player1.getBoardGame(),coordinate);
+                isPossibleToPlaceShip = battleship.isPlacingShipHorizontallyPossible(player.getBoardGame(),coordinate);
             } else {
-                isPossibleToPlaceShip = player1Battleship.isPlacingShipVerticallyPossible(player1.getBoardGame(),coordinate);
+                isPossibleToPlaceShip = battleship.isPlacingShipVerticallyPossible(player.getBoardGame(),coordinate);
             }
             if (isPossibleToPlaceShip) {
-                placeBattleshipOnBoard(direction,player1Battleship,player1,coordinate);
+                placeBattleshipOnBoard(direction,battleship,player,coordinate);
             } else {
                 System.out.println("error, invalid coordinate\n");
             }
