@@ -11,11 +11,11 @@ class GameManager {
 
     public void startPlayerVsPlayerGame() {
         player1.createBattleshipBoard(); //test
-        placeBattleship(player1, player1Battleship);
+        placeShip(player1, player1Battleship, "Please, place the Battleship/ it occupies 5 coordinates");
 
     }
 
-    private void placeBattleshipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
+    private void placeShipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
         if (direction.equals("H")) {
             ship.placeShipHorizontally(player.getBoardGame(), coordinate);
         } else {
@@ -23,11 +23,11 @@ class GameManager {
         }
     }
 
-    private void placeBattleship(Player player, Ship ship) {
+    private void placeShip(Player player, Ship ship, String title) {
         //player.createBattleshipBoard(); test this outside, in order to see if it works
         player.displayBattleshipBoard();
         System.out.println();
-        System.out.println("Please, place the Battleship/ it occupies 5 coordinates");
+        System.out.println(title);
         Coordinate coordinate;
         boolean isPlacementValid = false;
         do {
@@ -42,7 +42,7 @@ class GameManager {
                 isPlacementValid = ship.isPlacingShipVerticallyPossible(player.getBoardGame(), coordinate);
             }
             if (isPlacementValid) {
-                placeBattleshipOnBoard(direction, ship, player, coordinate);
+                placeShipOnBoard(direction, ship, player, coordinate);
             } else {
                 System.out.println("error, invalid coordinate\n");
             }
