@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="615ed208-f638-4338-b757-71c9ecb6864c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BattleshipGames/src/GameManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BattleshipGames/src/Battleship.java" beforeDir="false" afterPath="$PROJECT_DIR$/BattleshipGames/src/Battleship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BattleshipGames/src/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/BattleshipGames/src/Ship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BattleshipProject/Battleship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BattleshipProject/Battleship.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BattleshipGames/src/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/BattleshipGames/src/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BattleshipProject/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BattleshipProject/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BattleshipProject/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BattleshipProject/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

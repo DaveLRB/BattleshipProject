@@ -1,46 +1,22 @@
 import java.util.Scanner;
 
 class GameManager {
+    private static Scanner scan;
     private Player player1;
-    private Battleship battleship;
+    private Battleship player1Battleship;
 
     public GameManager() {
         this.player1 = new Player();
-        this.battleship = new Battleship();
+        this.player1Battleship = new Battleship();
+        scan = new Scanner(System.in);
     }
 
     public void startPlayerVsPlayerGame(){
-        player1.createBattleshipBoard();
-        player1.displayBattleshipBoard();
-        System.out.println();
-        System.out.println("Please, place the Battleship/ it occupies 5 coordinates");
-        Coordinate coordinate;
-        boolean isPossible = false;
-        do {
-            String direction = getDirectionHorizontalOrVerticalInput();
-            String userCoordinate = getCoordinateInput();
-            int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
-            coordinate = new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
-            System.out.println(coordinate);
-            System.out.println();
-            if (direction.equals("H")) {
-                isPossible = battleship.isPlacingShipHorizontallyPossible(player1.getBoardGame(),coordinate);
-            } else {
-                isPossible = battleship.isPlacingShipVerticallyPossible(player1.getBoardGame(),coordinate);
-            }
-            if (isPossible && direction.equals("H")) {
-                battleship.placeShipHorizontally(player1.getBoardGame(),coordinate);
-            } else if (isPossible && direction.equals("V")) {
-                battleship.placeShipVertically(player1.getBoardGame(),coordinate);
-            } else {
-                System.out.println("error, invalid coordinate\n");
-            }
-        } while (!isPossible);
-        player1.displayBattleshipBoard();
+        placeBattleship(player1,player1Battleship);
+
     }
 
     private static String getCoordinateInput() {
-        Scanner scan = new Scanner(System.in);
         System.out.println("Please write a coordinate");
         String userCoordinate = scan.nextLine();
         if (isCoordinateValid(userCoordinate)) {
@@ -83,12 +59,51 @@ class GameManager {
     }
 
     private static String getDirectionHorizontalOrVerticalInput() {
-        Scanner scan = new Scanner(System.in);
         String chosenDirection;
         do {
             System.out.println("Choose direction: [H] Horizontal or [V] Vertical");
             chosenDirection = scan.nextLine().toUpperCase();
         } while (!chosenDirection.equals("H") && !chosenDirection.equals("V"));
         return chosenDirection;
+    }
+
+    private static Coordinate createCoordinate(String userCoordinate){
+        int[] splittedUserCoordinateInt = turnCoordinateStringToInt(userCoordinate);
+        return new Coordinate(splittedUserCoordinateInt[0], splittedUserCoordinateInt[1]);
+    }
+
+    private static void placeBattleshipOnBoard(String direction, Battleship battleship, Player player,Coordinate coordinate){
+        if (direction.equals("H")) {
+            battleship.placeShipHorizontally(player.getBoardGame(), coordinate);
+        } else {
+            battleship.placeShipVertically(player.getBoardGame(), coordinate);
+        }
+    }
+
+    private void placeBattleship(Player player, Battleship battleship){
+        player.createBattleshipBoard();
+        player.displayBattleshipBoard();
+        System.out.println();
+        System.out.println("Please, place the Battleship/ it occupies 5 coordinates");
+        Coordinate coordinate;
+        boolean isPossibleToPlaceShip = false;
+        do {
+            String direction = getDirectionHorizontalOrVerticalInput();
+            String userCoordinate = getCoordinateInput();
+            coordinate = createCoordinate(userCoordinate);
+            System.out.println(coordinate);
+            System.out.println();
+            if (direction.equals("H")) {
+                isPossibleToPlaceShip = player1Battleship.isPlacingShipHorizontallyPossible(player1.getBoardGame(),coordinate);
+            } else {
+                isPossibleToPlaceShip = player1Battleship.isPlacingShipVerticallyPossible(player1.getBoardGame(),coordinate);
+            }
+            if (isPossibleToPlaceShip) {
+                placeBattleshipOnBoard(direction,player1Battleship,player1,coordinate);
+            } else {
+                System.out.println("error, invalid coordinate\n");
+            }
+        } while (!isPossibleToPlaceShip);
+        player1.displayBattleshipBoard();
     }
 }
