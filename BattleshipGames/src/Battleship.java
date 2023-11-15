@@ -1,9 +1,5 @@
 public class Battleship extends Ship {
 
-    public static void shootMissile() {
-
-    }
-
     public void placeShipHorizontally(String[][] boardgame, Coordinate coordinate) {
         boardgame[coordinate.getRow()][coordinate.getColumn()] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow()][coordinate.getColumn() - 1] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);

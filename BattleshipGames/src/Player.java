@@ -1,7 +1,6 @@
 public class Player {
-
-    private String[][] boardGame = new String[10][10];
     private final int sizeOfRowsAndColumns = 10;
+    private String[][] boardGame = new String[sizeOfRowsAndColumns][sizeOfRowsAndColumns];
 
     public void createBattleshipBoard() {
         for (int row = 0; row < sizeOfRowsAndColumns; row++) {

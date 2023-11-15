@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class InputValidator {
+class InputHandler {
 
     public static String getCoordinateInput() {
         Scanner scan = new Scanner(System.in);
