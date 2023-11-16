@@ -9,8 +9,13 @@ class GameManager {
 
     public void startPlayerVsPlayerGame() {
         player1.createBattleshipBoard(); //test
+        placeShip(player1, new AircraftCarrier(), "Please, place the Carrier / it occupies 6 coordinates");
+        placeShip(player1, new Submarine(), "Please, place the Submarine / it occupies 4 coordinates");
         placeShip(player1, new Battleship(), "Please, place the Battleship/ it occupies 5 coordinates");
-
+        placeShip(player1, new Corvette(), "Please, place the Corvette / it occupies 4 coordinates");
+        placeShip(player1, new Cruiser(), "Please, place the Cruiser / it occupies 3 coordinates");
+        placeShip(player1, new Destroyer(), "Please, place the Destroyer / it occupies 2 coordinates");
+        player1.displayBattleshipBoard();
     }
 
     private void placeShipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
@@ -19,6 +24,7 @@ class GameManager {
             System.out.println(ship.getCoordinates());
         } else {
             ship.placeShipVertically(player.getBoard(), coordinate);
+            System.out.println(ship.getCoordinates());
         }
     }
 
@@ -46,7 +52,7 @@ class GameManager {
                 System.out.println("error, invalid coordinate\n");
             }
         } while (!isPlacementValid);
-        player1.displayBattleshipBoard();
+        //player1.displayBattleshipBoard();
 
     }
 }

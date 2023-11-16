@@ -1,17 +1,23 @@
 import java.util.ArrayList;
 
-class Cruiser extends Ship{
+class Cruiser extends Ship {
 
     public void placeShipHorizontally(String[][] boardgame, Coordinate coordinate) {
         boardgame[coordinate.getRow()][coordinate.getColumn()] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow()][coordinate.getColumn() - 1] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow()][coordinate.getColumn() + 1] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
+        coordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn()));
+        coordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn() + 1));
+        coordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn() - 1));
     }
 
     public void placeShipVertically(String[][] boardgame, Coordinate coordinate) {
         boardgame[coordinate.getRow()][coordinate.getColumn()] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow() - 1][coordinate.getColumn()] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow() + 1][coordinate.getColumn()] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
+        coordinates.add(new Coordinate(coordinate.getRow(),coordinate.getColumn()));
+        coordinates.add(new Coordinate(coordinate.getRow()-1,coordinate.getColumn()));
+        coordinates.add(new Coordinate(coordinate.getRow()+1,coordinate.getColumn()));
     }
 
 
@@ -38,7 +44,7 @@ class Cruiser extends Ship{
         return false;
     }
 
-    public ArrayList<Coordinate> getCoordinates(){
+    public ArrayList<Coordinate> getCoordinates() {
         return coordinates;
     }
 }
