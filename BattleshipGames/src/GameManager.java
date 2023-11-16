@@ -1,21 +1,35 @@
 import java.util.Scanner;
+import java.util.Random;
 
 class GameManager {
-    private Player player1;
-
-    public GameManager() {
-        this.player1 = new Player();
-    }
+    public GameManager() {}
 
     public void startPlayerVsPlayerGame() {
-        player1.createBattleshipBoard(); //test
-        placeShip(player1, new AircraftCarrier(), "Please, place the Carrier / it occupies 6 coordinates");
-        placeShip(player1, new Battleship(), "Please, place the Battleship/ it occupies 5 coordinates");
-        placeShip(player1, new Submarine(), "Please, place the Submarine / it occupies 4 coordinates");
-        placeShip(player1, new Corvette(), "Please, place the Corvette / it occupies 4 coordinates");
-        placeShip(player1, new Cruiser(), "Please, place the Cruiser / it occupies 3 coordinates");
-        placeShip(player1, new Destroyer(), "Please, place the Destroyer / it occupies 2 coordinates");
-        player1.displayBattleshipBoard();
+        //player1.createBattleshipBoard(); //test
+        //placeShipManuallyPlayer(player1);
+        //placeShipRandomly(player1, new Battleship());
+    }
+
+    public void placeShipsManually(Player player){
+        player.createBattleshipBoard();
+        placeShip(player, new AircraftCarrier(), "Please, place the Carrier / it occupies 6 coordinates");
+        placeShip(player, new Battleship(), "Please, place the Battleship/ it occupies 5 coordinates");
+        placeShip(player, new Submarine(), "Please, place the Submarine / it occupies 4 coordinates");
+        placeShip(player, new Corvette(), "Please, place the Corvette / it occupies 4 coordinates");
+        placeShip(player, new Cruiser(), "Please, place the Cruiser / it occupies 3 coordinates");
+        placeShip(player, new Destroyer(), "Please, place the Destroyer / it occupies 2 coordinates");
+        player.displayBattleshipBoard();
+    }
+
+    public void placeShipsRandomly(Player player){
+        player.createBattleshipBoard();
+        placeShipRandomly(player, new AircraftCarrier());
+        placeShipRandomly(player, new Battleship());
+        placeShipRandomly(player, new Submarine());
+        placeShipRandomly(player, new Corvette());
+        placeShipRandomly(player, new Cruiser());
+        placeShipRandomly(player, new Destroyer());
+        player.displayBattleshipBoard();
     }
 
     private void placeShipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
@@ -55,6 +69,30 @@ class GameManager {
             }
         } while (!isPlacementValid);
         //player1.displayBattleshipBoard();
+    }
 
+    private void placeShipRandomly(Player player, Ship ship) {
+        Random random = new Random();
+        int directionInt = random.nextInt(3);
+        String direction;
+        if(directionInt==1){
+            direction="H";
+        }else{
+            direction="V";
+        }
+        boolean isPlacementValid;
+        do{
+            int row = random.nextInt(10);
+            int column = random.nextInt(10);
+            Coordinate coordinate = new Coordinate(row,column);
+            if(direction.equals("H")){
+                isPlacementValid = ship.isPlacingShipHorizontallyPossible(player.getBoard(), coordinate);
+            }else{
+                isPlacementValid = ship.isPlacingShipVerticallyPossible(player.getBoard(), coordinate);
+            }
+            if(isPlacementValid){
+                placeShipOnBoard(direction, ship, player, coordinate);
+            }
+        }while(!isPlacementValid);
     }
 }

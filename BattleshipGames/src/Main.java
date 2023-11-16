@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Player player1 = new Player();
+        Player player2 = new Player();
         GameManager game = new GameManager();
 
         Scanner input = new Scanner(System.in);
@@ -15,7 +17,23 @@ public class Main {
         String options = input.next();
         switch (options) {
             case "1":
-                game.startPlayerVsPlayerGame();
+                System.out.println("1. Place Ships Manually\n2. Place Ships Randomly");
+                input.nextLine();
+                String userInput = input.nextLine();
+
+                System.out.println(userInput);
+                switch(userInput){
+                    case "1":
+                        game.placeShipsManually(player1);
+                        break;
+                    case "2":
+                        game.placeShipsRandomly(player1);
+                        break;
+                    default:
+                        System.out.println("please input correct one");
+                        break;
+                }
+                //game.startPlayerVsPlayerGame();
                 break;
             case "2":
 
