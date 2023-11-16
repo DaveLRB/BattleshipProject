@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Player {
+class Player {
     private final int SIZE_OF_ROWS_AND_COLUMNS= 10;
     private String[][] board = new String[SIZE_OF_ROWS_AND_COLUMNS][SIZE_OF_ROWS_AND_COLUMNS];
     ArrayList<Ship> ships = new ArrayList<>();

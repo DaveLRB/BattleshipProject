@@ -1,4 +1,6 @@
-public class Corvette extends Ship {
+import java.util.ArrayList;
+
+class Corvette extends Ship {
 
 
     public void placeShipHorizontally(String[][] boardgame, Coordinate coordinate) {
@@ -39,5 +41,9 @@ public class Corvette extends Ship {
         }
         return false;
 
+    }
+
+    public ArrayList<Coordinate> getCoordinates(){
+        return coordinates;
     }
 }

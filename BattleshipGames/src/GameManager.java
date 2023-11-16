@@ -2,22 +2,21 @@ import java.util.Scanner;
 
 class GameManager {
     private Player player1;
-    private Battleship player1Battleship;
 
     public GameManager() {
         this.player1 = new Player();
-        this.player1Battleship = new Battleship();
     }
 
     public void startPlayerVsPlayerGame() {
         player1.createBattleshipBoard(); //test
-        placeShip(player1, player1Battleship, "Please, place the Battleship/ it occupies 5 coordinates");
+        placeShip(player1, new Battleship(), "Please, place the Battleship/ it occupies 5 coordinates");
 
     }
 
     private void placeShipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
         if (direction.equals("H")) {
             ship.placeShipHorizontally(player.getBoard(), coordinate);
+            System.out.println(ship.getCoordinates());
         } else {
             ship.placeShipVertically(player.getBoard(), coordinate);
         }
