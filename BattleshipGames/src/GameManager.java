@@ -17,9 +17,9 @@ class GameManager {
 
     private void placeShipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
         if (direction.equals("H")) {
-            ship.placeShipHorizontally(player.getBoardGame(), coordinate);
+            ship.placeShipHorizontally(player.getBoard(), coordinate);
         } else {
-            ship.placeShipVertically(player.getBoardGame(), coordinate);
+            ship.placeShipVertically(player.getBoard(), coordinate);
         }
     }
 
@@ -37,9 +37,9 @@ class GameManager {
             System.out.println(coordinate);
             System.out.println();
             if (direction.equals("H")) {
-                isPlacementValid = ship.isPlacingShipHorizontallyPossible(player.getBoardGame(), coordinate);
+                isPlacementValid = ship.isPlacingShipHorizontallyPossible(player.getBoard(), coordinate);
             } else {
-                isPlacementValid = ship.isPlacingShipVerticallyPossible(player.getBoardGame(), coordinate);
+                isPlacementValid = ship.isPlacingShipVerticallyPossible(player.getBoard(), coordinate);
             }
             if (isPlacementValid) {
                 placeShipOnBoard(direction, ship, player, coordinate);
