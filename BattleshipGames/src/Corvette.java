@@ -8,6 +8,10 @@ class Corvette extends Ship {
         boardgame[coordinate.getRow()][coordinate.getColumn() - 1] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow()][coordinate.getColumn() + 1] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow()][coordinate.getColumn() + 2] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
+        coordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn()));
+        coordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn()-1));
+        coordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn()+1));
+        coordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn()+2));
     }
 
 
@@ -16,6 +20,10 @@ class Corvette extends Ship {
         boardgame[coordinate.getRow() - 1][coordinate.getColumn()] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow() + 1][coordinate.getColumn()] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
         boardgame[coordinate.getRow() + 2][coordinate.getColumn()] = boardgame[coordinate.getRow()][coordinate.getColumn()].replace(WATER_SYMBOL, SHIP_SYMBOL);
+        coordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn()));
+        coordinates.add(new Coordinate(coordinate.getRow()-1, coordinate.getColumn()));
+        coordinates.add(new Coordinate(coordinate.getRow()+1, coordinate.getColumn()));
+        coordinates.add(new Coordinate(coordinate.getRow()+2, coordinate.getColumn()));
     }
 
 
