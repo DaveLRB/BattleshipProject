@@ -16,4 +16,11 @@ abstract class Ship {
     public abstract boolean isPlacingShipVerticallyPossible(String[][] boardgame, Coordinate coordinate);
 
     public abstract ArrayList<Coordinate> getCoordinates();
+
+    protected void placeShip(String[][] boardgame, Coordinate[] shipCoordinates) {
+        for (Coordinate coordinate : shipCoordinates) {
+            boardgame[coordinate.getRow()][coordinate.getColumn()] = SHIP_SYMBOL;
+            coordinates.add(coordinate);
+        }
+    }
 }
