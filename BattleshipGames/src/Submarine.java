@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 
 class Submarine extends Ship {
-
+    public Submarine() {
+        shipName="Submarine";
+    }
 
     public void placeShipHorizontally(String[][] boardgame, Coordinate coordinate) {
         Coordinate[] shipCoordinates = {

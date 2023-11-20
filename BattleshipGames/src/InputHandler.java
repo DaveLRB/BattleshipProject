@@ -14,6 +14,19 @@ class InputHandler {
         return userCoordinate;
     }
 
+    public static Coordinate getCoordinate() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please write a coordinate");
+        String userCoordinate = scan.nextLine();
+        if (isCoordinateValid(userCoordinate)) {
+            Coordinate coordinateInput = createCoordinate(userCoordinate);
+            return coordinateInput;
+        } else {
+            System.out.println("Write a valid coordinate!");
+        }
+        return new Coordinate();
+    }
+
     private static boolean isCoordinateValid(String userCoordinate) {
         String[] splittedUserCoordinate = userCoordinate.toLowerCase().trim().split("");
         if (userCoordinate.trim().length() != 2 && userCoordinate.trim().length() != 3) {

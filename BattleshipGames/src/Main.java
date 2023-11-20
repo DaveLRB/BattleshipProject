@@ -18,6 +18,15 @@ public class Main {
             case PLAYER_VS_PLAYER:
                 playerPlay(player1, game, "1");
                 playerPlay(player2, game, "2");
+                do {
+                    game.playerShootsMissile(player2, player2.getBoard(), "1");
+                    game.playerShootsMissile(player1, player1.getBoard(), "2");
+                }while(!(player1.isGameOver()) && !(player2.isGameOver()));
+                if(player1.isGameOver()){
+                    System.out.println("Player 2 wins");
+                }else{
+                    System.out.println("Player 1 wins");
+                }
                 //game.startPlayerVsPlayerGame();
                 break;
             case PLAYER_VS_COMPUTER:
@@ -34,6 +43,7 @@ public class Main {
         }
 
     }
+
 
     private static void playerPlay(Player player, GameManager game, String numberOfPlayer) {
         System.out.println("\nIt's the player" + numberOfPlayer + " time to choose\n");
@@ -53,7 +63,12 @@ public class Main {
                     //input.nextLine();
                     choiceInput = scan.nextLine();
                     if (!(choiceInput.equals("1"))) {
-                        game.placeShipsRandomly(player);
+                        if(player.getShips().isEmpty()){
+                            game.placeShipsRandomly(player);
+                        }else{
+                            player.getShips().clear();
+                            game.placeShipsRandomly(player);
+                        }
                     }
                 } while (!(choiceInput.equals("1")));
                 break;

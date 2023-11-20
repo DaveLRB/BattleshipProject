@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class Player {
-    private final int SIZE_OF_ROWS_AND_COLUMNS= 10;
+    private final int SIZE_OF_ROWS_AND_COLUMNS = 10;
     private String[][] board = new String[SIZE_OF_ROWS_AND_COLUMNS][SIZE_OF_ROWS_AND_COLUMNS];
-    ArrayList<Ship> ships = new ArrayList<>();
+    private ArrayList<Ship> ships = new ArrayList<>();
 
     public void createBattleshipBoard() {
-        for(String[] symbol : board){
-            Arrays.fill(symbol,"🌊");
+        for (String[] symbol : board) {
+            Arrays.fill(symbol, "🌊");
         }
     }
 
@@ -38,7 +38,41 @@ class Player {
         return ships;
     }
 
-    public void addShip(Ship ship){
+    public void addShip(Ship ship) {
         ships.add(ship);
+    }
+
+    public boolean isAnyShipSunk() {
+        for (int i = 0; i < ships.size(); i++) {
+            if (ships.get(i).getCoordinates().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getNameOfSunkShip() {
+        for (int i = 0; i < ships.size(); i++) {
+            if (ships.get(i).getCoordinates().isEmpty()) {
+                String nameOfTheShip = ships.get(i).getShipName();
+                return nameOfTheShip;
+            }
+        }
+        return "";
+    }
+
+    public void removeSunkShip() {
+        for (int i = 0; i < ships.size(); i++) {
+            if (ships.get(i).getCoordinates().isEmpty()) {
+                this.getShips().remove(this.getShips().get(i));
+            }
+        }
+    }
+
+    public boolean isGameOver() {
+        if (ships.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

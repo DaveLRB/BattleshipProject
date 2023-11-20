@@ -4,6 +4,7 @@ abstract class Ship {
     protected static final String WATER_SYMBOL = "🌊";
     protected static final String SHIP_SYMBOL = "⚓️";
     protected static final String BOMB_SYMBOL = "💥";
+    protected String shipName;
     protected ArrayList<Coordinate> coordinates = new ArrayList<>();
 
     // Abstract methods to be implemented by subclasses
@@ -22,5 +23,9 @@ abstract class Ship {
             boardgame[coordinate.getRow()][coordinate.getColumn()] = SHIP_SYMBOL;
             coordinates.add(coordinate);
         }
+    }
+
+    public String getShipName() {
+        return shipName;
     }
 }

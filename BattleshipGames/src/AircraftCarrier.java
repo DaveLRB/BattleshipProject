@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 class AircraftCarrier extends Ship {
 
+    public AircraftCarrier() {
+        shipName="Aircraft Carrier";
+    }
 
     public void placeShipHorizontally(String[][] boardgame, Coordinate coordinate) {
         Coordinate[] shipCoordinates = {
