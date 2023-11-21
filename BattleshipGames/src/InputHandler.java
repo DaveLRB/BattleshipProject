@@ -3,14 +3,17 @@ import java.util.Scanner;
 class InputHandler {
 
     public static String getCoordinateInput() {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please write a coordinate");
-        String userCoordinate = scan.nextLine();
-        if (isCoordinateValid(userCoordinate)) {
-            return userCoordinate;
-        } else {
-            System.out.println("Write a valid coordinate!");
-        }
+        String userCoordinate;
+        do {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Please write a coordinate");
+            userCoordinate = scan.nextLine();
+            if (isCoordinateValid(userCoordinate)) {
+                return userCoordinate;
+            } else {
+                System.out.println("Write a valid coordinate!");
+            }
+        } while (!(isCoordinateValid(userCoordinate)));
         return userCoordinate;
     }
 
@@ -42,6 +45,9 @@ class InputHandler {
     }
 
     private static boolean isCoordinateValid(String userCoordinate) {
+        if (userCoordinate.isEmpty()) {
+            return false;
+        }
         String[] splittedUserCoordinate = userCoordinate.toLowerCase().trim().split("");
         if (userCoordinate.trim().length() != 2 && userCoordinate.trim().length() != 3) {
             return false;
