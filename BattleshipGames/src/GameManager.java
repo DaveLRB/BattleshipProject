@@ -31,14 +31,17 @@ class GameManager {
 
     public void playerShootsMissile(Player player, String[][] boardgame, String numberOfPlayer){
         boolean isThereShip;
+        String nameOfTheSunkShip="";
+        boolean isAnyShipSunk= false;
         do{
             isThereShip=false;
             System.out.println("It's time for Player "+ numberOfPlayer + " to play");
-            if(player.isAnyShipSunk()){
-                System.out.println("The "+ player.getNameOfSunkShip()+ " was sunk");
+            if(isAnyShipSunk){
+                System.out.println("The "+ nameOfTheSunkShip+ " was sunk");
             }
+            isAnyShipSunk=false;
             player.displayBattleshipBoard();
-            Coordinate userCoordinate = InputHandler.getCoordinate();;
+            Coordinate userCoordinate = InputHandler.getCoordinate(player);;
             for(int i=0; i<player.getShips().size();i++){
                 ArrayList<Coordinate> shipCoordinates = player.getShips().get(i).coordinates;
                 for(int i1=0; i1<player.getShips().get(i).getCoordinates().size();i1++){
@@ -50,7 +53,15 @@ class GameManager {
                     }
                 }
             }
+            if(player.isAnyShipSunk()){
+                isAnyShipSunk=true;
+                nameOfTheSunkShip= player.getNameOfSunkShip();
+                player.removeSunkShip();
+            }
             //problems with player.isAnyShipsSunk/ it isn't properly removing the ships and coordinates
+            //get the name of the ship before eliminating it RIGHT HERE.
+            //I need to eliminate the ship at the right time and keep the name
+
             if(!isThereShip){
                 boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = MISS_SYMBOL ;
             }

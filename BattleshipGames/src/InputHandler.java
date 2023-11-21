@@ -14,17 +14,31 @@ class InputHandler {
         return userCoordinate;
     }
 
-    public static Coordinate getCoordinate() {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please write a coordinate");
-        String userCoordinate = scan.nextLine();
-        if (isCoordinateValid(userCoordinate)) {
-            Coordinate coordinateInput = createCoordinate(userCoordinate);
-            return coordinateInput;
-        } else {
-            System.out.println("Write a valid coordinate!");
-        }
+    public static Coordinate getCoordinate(Player player) {
+        Coordinate coordinateInput = new Coordinate();
+        do {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Please write a coordinate");
+            String userCoordinate = scan.nextLine();
+            if (isCoordinateValid(userCoordinate)) {
+                coordinateInput = createCoordinate(userCoordinate);
+                if (!(isCoordinateAlreadyPlayed(coordinateInput, player.getBoard()))) {
+                    return coordinateInput;
+                } else {
+                    System.out.println("Write a valid coordinate!");
+                }
+            } else {
+                System.out.println("Write a valid coordinate!");
+            }
+        } while (isCoordinateAlreadyPlayed(coordinateInput, player.getBoard()));
         return new Coordinate();
+    }
+
+    private static boolean isCoordinateAlreadyPlayed(Coordinate coordinateInput, String[][] board) {
+        if (board[coordinateInput.getRow()][coordinateInput.getColumn()].equals("𝐗") || board[coordinateInput.getRow()][coordinateInput.getColumn()].equals("💥")) {
+            return true;
+        }
+        return false;
     }
 
     private static boolean isCoordinateValid(String userCoordinate) {

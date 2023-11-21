@@ -20,13 +20,16 @@ public class Main {
                 playerPlay(player2, game, "2");
                 do {
                     game.playerShootsMissile(player2, player2.getBoard(), "1");
+                    if(player2.isGameOver()){
+                        System.out.println("Player 1 wins");
+                        break;
+                    }
                     game.playerShootsMissile(player1, player1.getBoard(), "2");
+                    if(player1.isGameOver()){
+                        System.out.println("Player 2 wins");
+                        break;
+                    }
                 }while(!(player1.isGameOver()) && !(player2.isGameOver()));
-                if(player1.isGameOver()){
-                    System.out.println("Player 2 wins");
-                }else{
-                    System.out.println("Player 1 wins");
-                }
                 //game.startPlayerVsPlayerGame();
                 break;
             case PLAYER_VS_COMPUTER:
