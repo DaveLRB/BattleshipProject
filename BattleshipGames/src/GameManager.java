@@ -30,17 +30,28 @@ class GameManager {
         player.createBattleshipBoard();
     }
 
+    public void placeShipsRandomlyForComputer(Player player){
+        player.createBattleshipBoard();
+        placeShipRandomly(player, new AircraftCarrier());
+        placeShipRandomly(player, new Battleship());
+        placeShipRandomly(player, new Submarine());
+        placeShipRandomly(player, new Corvette());
+        placeShipRandomly(player, new Cruiser());
+        placeShipRandomly(player, new Destroyer());
+        player.createBattleshipBoard();
+    }
+
     public void playerShootsMissile(Player player, String[][] boardgame, String numberOfPlayer) {
-        boolean isThereShip=false;
+        boolean isThereShip = false;
         String nameOfTheSunkShip = "";
         boolean isAnyShipSunk = false;
         do {
             System.out.println();
             System.out.println(Colors.BRIGHT_CYAN + "Player " + numberOfPlayer + " plays" + Colors.RESET);
             System.out.println();
-            System.out.println(Colors.BRIGHT_YELLOW + "Ships left: "+ player.getShips().size() + Colors.RESET);
+            System.out.println(Colors.BRIGHT_YELLOW + "Ships left: " + player.getShips().size() + Colors.RESET);
             System.out.println();
-            if(isThereShip){
+            if (isThereShip) {
                 System.out.println(Colors.BRIGHT_GREEN + "\n" +
                         "╔═╗┬ ┬┌─┐┌┬┐  ╦ ╦┬┌┬┐\n" +
                         "╚═╗├─┤│ │ │   ╠═╣│ │ \n" +
@@ -54,7 +65,7 @@ class GameManager {
             isAnyShipSunk = false;
             player.displayBattleshipBoard();
             Coordinate userCoordinate = InputHandler.getCoordinate(player);
-            ;
+
             for (int i = 0; i < player.getShips().size(); i++) {
                 //ArrayList<Coordinate> shipCoordinates = player.getShips().get(i).coordinates;
                 for (int i1 = 0; i1 < player.getShips().get(i).getCoordinates().size(); i1++) {
@@ -71,9 +82,6 @@ class GameManager {
                 nameOfTheSunkShip = player.getNameOfSunkShip();
                 player.removeSunkShip();
             }
-            //problems with player.isAnyShipsSunk/ it isn't properly removing the ships and coordinates
-            //get the name of the ship before eliminating it RIGHT HERE.
-            //I need to eliminate the ship at the right time and keep the name
 
             if (!isThereShip) {
                 boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = MISS_SYMBOL;
@@ -88,6 +96,69 @@ class GameManager {
         } while (isThereShip && !player.isGameOver());
     }
 
+    public void playerShootsMissile(Player player, String[][] boardgame) {
+        Random random = new Random();
+        boolean isThereShip = false;
+        boolean isAnyShipSunk = false;
+        String nameOfTheSunkShip = "";
+        boolean needsToRepeat;
+        do {
+            System.out.println();
+            System.out.println(Colors.BRIGHT_CYAN + "Computer plays" + Colors.RESET);
+            System.out.println();
+            System.out.println(Colors.BRIGHT_YELLOW + "Ships left: " + player.getShips().size() + Colors.RESET);
+            if (isThereShip) {
+                System.out.println(Colors.BRIGHT_GREEN + "\n" +
+                        "╔═╗┬ ┬┌─┐┌┬┐  ╦ ╦┬┌┬┐\n" +
+                        "╚═╗├─┤│ │ │   ╠═╣│ │ \n" +
+                        "╚═╝┴ ┴└─┘ ┴   ╩ ╩┴ ┴ \n" + Colors.RESET);
+                player.displayBattleshipBoard();
+            }
+            isThereShip = false;
+            if (isAnyShipSunk) {
+                System.out.println("⚓️" + Colors.CYAN + " The " + nameOfTheSunkShip + " was sunk " + Colors.RESET + " ⚓️");
+                System.out.println();
+            }
+            isAnyShipSunk = false;
+            needsToRepeat=false;
+            Coordinate userCoordinate = new Coordinate(random.nextInt(10), random.nextInt(10));
+            for (int i = 0; i < player.getShips().size(); i++) {
+                //ArrayList<Coordinate> shipCoordinates = player.getShips().get(i).coordinates;
+                for (int i1 = 0; i1 < player.getShips().get(i).getCoordinates().size(); i1++) {
+                    if (player.getShips().get(i).getCoordinates().get(i1).toString().equals(userCoordinate.toString())) {
+                        player.getShips().get(i).getCoordinates().remove(player.getShips().get(i).getCoordinates().get(i1));
+                        if(boardgame[userCoordinate.getRow()][userCoordinate.getColumn()].equals(BOMB_SYMBOL)){
+                            needsToRepeat = true;
+                        }else{
+                            boardgame[userCoordinate.getRow()][userCoordinate.getColumn()]=BOMB_SYMBOL;
+                        }
+                        isThereShip = true;
+                        break;
+                    }
+                }
+            }
+            if (player.isAnyShipSunk()) {
+                isAnyShipSunk = true;
+                nameOfTheSunkShip = player.getNameOfSunkShip();
+                player.removeSunkShip();
+            }
+            if (!isThereShip) {
+                if(boardgame[userCoordinate.getRow()][userCoordinate.getColumn()].equals(MISS_SYMBOL)){
+                    needsToRepeat=true;
+                }else{
+                    boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = MISS_SYMBOL;
+                }
+            }
+            if (!isThereShip) {
+                System.out.println(Colors.BRIGHT_RED + "\n" +
+                        "╔╦╗┬┌─┐┌─┐┌─┐┌┬┐  ┌─┐┬ ┬┌─┐┌┬┐\n" +
+                        "║║║│└─┐└─┐├┤  ││  └─┐├─┤│ │ │ \n" +
+                        "╩ ╩┴└─┘└─┘└─┘─┴┘  └─┘┴ ┴└─┘ ┴ \n" + Colors.RESET);
+                player.displayBattleshipBoard();
+            }
+        } while (isThereShip && !player.isGameOver() && !needsToRepeat);
+    }
+
     private void placeShipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
         if (direction.equals("H")) {
             ship.placeShipHorizontally(player.getBoard(), coordinate);
@@ -100,7 +171,7 @@ class GameManager {
         }
     }
 
-    public void placeShipOnBoard(Ship ship, Player player, Coordinate coordinate){
+    public void placeShipOnBoard(Ship ship, Player player, Coordinate coordinate) {
         ship.placeShipHorizontally(player.getBoard(), coordinate);
     }
 

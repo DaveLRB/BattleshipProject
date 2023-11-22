@@ -12,8 +12,10 @@ public class Main {
         Player player1 = new Player();
         Player player2 = new Player();
         Player handbook = new Player();
+        Player player3 = new Player();
+        Player computerPlayer = new Player();
         GameManager game = new GameManager();
-
+        GameManager playerVersusComputerGame = new GameManager();
         //Scanner input = new Scanner(System.in);
         String selectedOption;
         do {
@@ -53,7 +55,27 @@ public class Main {
                     //game.startPlayerVsPlayerGame();
                     break;
                 case PLAYER_VS_COMPUTER:
-
+                    playerPlay(player3, playerVersusComputerGame, "1");
+                    computerPlay(playerVersusComputerGame, computerPlayer);
+                    do {
+                        playerVersusComputerGame.playerShootsMissile(computerPlayer, computerPlayer.getBoard(), "1");
+                        if (computerPlayer.isGameOver()) {
+                            System.out.println(Colors.BRIGHT_YELLOW + "\n" +
+                                    "██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗      ██╗    ██╗    ██╗██╗███╗   ██╗███████╗\n" +
+                                    "██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ███║    ██║    ██║██║████╗  ██║██╔════╝\n" +
+                                    "██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝    ╚██║    ██║ █╗ ██║██║██╔██╗ ██║███████╗\n" +
+                                    "██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗     ██║    ██║███╗██║██║██║╚██╗██║╚════██║\n" +
+                                    "██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║     ██║    ╚███╔███╔╝██║██║ ╚████║███████║\n" +
+                                    "╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝     ╚═╝     ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝\n" +
+                                    "                                                                                            \n" + Colors.RESET);
+                            break;
+                        }
+                        playerVersusComputerGame.playerShootsMissile(player3, player3.getBoard());
+                        if (player3.isGameOver()) {
+                            //put here SYSTEM OUT OF COMPUTER WINS
+                        }
+                        //put here the random shot method
+                    } while (!(player3.isGameOver()) && !(computerPlayer.isGameOver()));
                     break;
                 case HAND_BOOK:
                     System.out.println(Colors.BRIGHT_CYAN + "\n" +
@@ -87,7 +109,7 @@ public class Main {
                                 System.out.println(Colors.BRIGHT_RED + "Invalid option, please input correct one" + Colors.RESET);
                                 break;
                         }
-                    }while(!userInput.equals("1"));
+                    } while (!userInput.equals("1"));
                     break;
                 case EXIT_GAME:
                     System.out.println(Colors.BRIGHT_YELLOW + "\n" +
@@ -152,6 +174,10 @@ public class Main {
                 System.out.println(Colors.BRIGHT_RED + "Please input correct one" + Colors.RESET);
                 break;
         }
+    }
+
+    private static void computerPlay(GameManager playerVersusComputerGame, Player computerPlayer) {
+        playerVersusComputerGame.placeShipsRandomlyForComputer(computerPlayer);
     }
 
     private static void printGameMainMenu() {
