@@ -5,71 +5,114 @@ import java.util.Scanner;
 public class Main {
     private static final String PLAYER_VS_PLAYER = "1";
     private static final String PLAYER_VS_COMPUTER = "2";
+    private static final String HAND_BOOK = "3";
     private static final String EXIT_GAME = "0";
 
     public static void main(String[] args) {
         Player player1 = new Player();
         Player player2 = new Player();
+        Player handbook = new Player();
         GameManager game = new GameManager();
+        GameManager demonstration = new GameManager();
 
         //Scanner input = new Scanner(System.in);
-        printGameMainMenu();
-        Scanner input = new Scanner(System.in);
-        String selectedOption = input.nextLine();
-        switch (selectedOption) {
-            case PLAYER_VS_PLAYER:
-                playerPlay(player1, game, "1");
-                playerPlay(player2, game, "2");
-                do {
-                    game.playerShootsMissile(player2, player2.getBoard(), "1");
-                    if (player2.isGameOver()) {
-                        System.out.println(Colors.BRIGHT_YELLOW + "\n" +
-                                "██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗      ██╗    ██╗    ██╗██╗███╗   ██╗███████╗\n" +
-                                "██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ███║    ██║    ██║██║████╗  ██║██╔════╝\n" +
-                                "██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝    ╚██║    ██║ █╗ ██║██║██╔██╗ ██║███████╗\n" +
-                                "██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗     ██║    ██║███╗██║██║██║╚██╗██║╚════██║\n" +
-                                "██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║     ██║    ╚███╔███╔╝██║██║ ╚████║███████║\n" +
-                                "╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝     ╚═╝     ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝\n" +
-                                "                                                                                            \n" + Colors.RESET);
-                        break;
-                    }
-                    game.playerShootsMissile(player1, player1.getBoard(), "2");
-                    if (player1.isGameOver()) {
-                        System.out.println(Colors.BRIGHT_YELLOW + "\n" +
-                                "██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗     ██████╗     ██╗    ██╗██╗███╗   ██╗███████╗\n" +
-                                "██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ╚════██╗    ██║    ██║██║████╗  ██║██╔════╝\n" +
-                                "██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝     █████╔╝    ██║ █╗ ██║██║██╔██╗ ██║███████╗\n" +
-                                "██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗    ██╔═══╝     ██║███╗██║██║██║╚██╗██║╚════██║\n" +
-                                "██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║    ███████╗    ╚███╔███╔╝██║██║ ╚████║███████║\n" +
-                                "╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝    ╚══════╝     ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝\n" +
-                                "                                                                                                \n" + Colors.RESET);
-                        break;
-                    }
-                } while (!(player1.isGameOver()) && !(player2.isGameOver()));
-                //game.startPlayerVsPlayerGame();
-                break;
-            case PLAYER_VS_COMPUTER:
+        String selectedOption;
+        do {
+            printGameMainMenu();
+            Scanner input = new Scanner(System.in);
+            selectedOption = input.nextLine();
+            switch (selectedOption) {
+                case PLAYER_VS_PLAYER:
+                    playerPlay(player1, game, "1");
+                    playerPlay(player2, game, "2");
+                    do {
+                        game.playerShootsMissile(player2, player2.getBoard(), "1");
+                        if (player2.isGameOver()) {
+                            System.out.println(Colors.BRIGHT_YELLOW + "\n" +
+                                    "██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗      ██╗    ██╗    ██╗██╗███╗   ██╗███████╗\n" +
+                                    "██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ███║    ██║    ██║██║████╗  ██║██╔════╝\n" +
+                                    "██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝    ╚██║    ██║ █╗ ██║██║██╔██╗ ██║███████╗\n" +
+                                    "██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗     ██║    ██║███╗██║██║██║╚██╗██║╚════██║\n" +
+                                    "██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║     ██║    ╚███╔███╔╝██║██║ ╚████║███████║\n" +
+                                    "╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝     ╚═╝     ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝\n" +
+                                    "                                                                                            \n" + Colors.RESET);
+                            break;
+                        }
+                        game.playerShootsMissile(player1, player1.getBoard(), "2");
+                        if (player1.isGameOver()) {
+                            System.out.println(Colors.BRIGHT_YELLOW + "\n" +
+                                    "██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗     ██████╗     ██╗    ██╗██╗███╗   ██╗███████╗\n" +
+                                    "██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ╚════██╗    ██║    ██║██║████╗  ██║██╔════╝\n" +
+                                    "██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝     █████╔╝    ██║ █╗ ██║██║██╔██╗ ██║███████╗\n" +
+                                    "██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗    ██╔═══╝     ██║███╗██║██║██║╚██╗██║╚════██║\n" +
+                                    "██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║    ███████╗    ╚███╔███╔╝██║██║ ╚████║███████║\n" +
+                                    "╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝    ╚══════╝     ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚══════╝\n" +
+                                    "                                                                                                \n" + Colors.RESET);
+                            break;
+                        }
+                    } while (!(player1.isGameOver()) && !(player2.isGameOver()));
+                    //game.startPlayerVsPlayerGame();
+                    break;
+                case PLAYER_VS_COMPUTER:
 
-                break;
-            case EXIT_GAME:
-                System.out.println(Colors.BRIGHT_YELLOW + "\n" +
-                        "███████╗██╗  ██╗██╗████████╗██╗███╗   ██╗ ██████╗     ██████╗  █████╗ ████████╗████████╗██╗     ███████╗███████╗██╗  ██╗██╗██████╗ \n" +
-                        "██╔════╝╚██╗██╔╝██║╚══██╔══╝██║████╗  ██║██╔════╝     ██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██║     ██╔════╝██╔════╝██║  ██║██║██╔══██╗\n" +
-                        "█████╗   ╚███╔╝ ██║   ██║   ██║██╔██╗ ██║██║  ███╗    ██████╔╝███████║   ██║      ██║   ██║     █████╗  ███████╗███████║██║██████╔╝\n" +
-                        "██╔══╝   ██╔██╗ ██║   ██║   ██║██║╚██╗██║██║   ██║    ██╔══██╗██╔══██║   ██║      ██║   ██║     ██╔══╝  ╚════██║██╔══██║██║██╔═══╝ \n" +
-                        "███████╗██╔╝ ██╗██║   ██║   ██║██║ ╚████║╚██████╔╝    ██████╔╝██║  ██║   ██║      ██║   ███████╗███████╗███████║██║  ██║██║██║     \n" +
-                        "╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝     \n" +
-                        "                                                                                                                                   \n" + Colors.RESET);
-                input.close();
-                System.exit(0);
-                break;
-            default:
-                System.out.println(Colors.BRIGHT_RED + "Invalid option, please input correct one" + Colors.RESET);
-                break;
-        }
-
+                    break;
+                case HAND_BOOK:
+                    System.out.println(Colors.BRIGHT_CYAN + "\n" +
+                            "╦═╗┬ ┬┬  ┌─┐┌─┐\n" +
+                            "╠╦╝│ ││  ├┤ └─┐\n" +
+                            "╩╚═└─┘┴─┘└─┘└─┘\n" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_BLUE + "*************************************************************************************" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_CYAN + "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_WHITE + "\t-> Place the ships MANUALLY or RANDOMLY\n" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_WHITE + "\t-> While choosing coordinates, ALWAYS choose ROWS, and then COLUMNS (Letter/Number)\n" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_WHITE + "\t-> If you HIT an enemy ship, you will keep playing!\n" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_WHITE + "\t-> If you MISS it passes to the enemy player turn!\n" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_WHITE + "\t-> When all ships on the enemy board are sunk YOU WIN\n" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_BLUE + "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_CYAN + "*************************************************************************************\n" + Colors.RESET);
+                    showShipDemonstration(handbook, new AircraftCarrier(), game);
+                    showShipDemonstration(handbook, new Battleship(), game);
+                    showShipDemonstration(handbook, new Submarine(), game);
+                    showShipDemonstration(handbook, new Corvette(), game);
+                    showShipDemonstration(handbook, new Cruiser(), game);
+                    showShipDemonstration(handbook, new Destroyer(), game);
+                    System.out.println(Colors.BRIGHT_WHITE + "1. Back to Starting Menu" + Colors.RESET);
+                    String userInput = input.nextLine();
+                    switch (userInput) {
+                        case "1":
+                            break;
+                        default:
+                            System.out.println(Colors.BRIGHT_RED + "Invalid option, please input correct one" + Colors.RESET);
+                            break;
+                    }
+                    break;
+                case EXIT_GAME:
+                    System.out.println(Colors.BRIGHT_YELLOW + "\n" +
+                            "███████╗██╗  ██╗██╗████████╗██╗███╗   ██╗ ██████╗     ██████╗  █████╗ ████████╗████████╗██╗     ███████╗███████╗██╗  ██╗██╗██████╗ \n" +
+                            "██╔════╝╚██╗██╔╝██║╚══██╔══╝██║████╗  ██║██╔════╝     ██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██║     ██╔════╝██╔════╝██║  ██║██║██╔══██╗\n" +
+                            "█████╗   ╚███╔╝ ██║   ██║   ██║██╔██╗ ██║██║  ███╗    ██████╔╝███████║   ██║      ██║   ██║     █████╗  ███████╗███████║██║██████╔╝\n" +
+                            "██╔══╝   ██╔██╗ ██║   ██║   ██║██║╚██╗██║██║   ██║    ██╔══██╗██╔══██║   ██║      ██║   ██║     ██╔══╝  ╚════██║██╔══██║██║██╔═══╝ \n" +
+                            "███████╗██╔╝ ██╗██║   ██║   ██║██║ ╚████║╚██████╔╝    ██████╔╝██║  ██║   ██║      ██║   ███████╗███████╗███████║██║  ██║██║██║     \n" +
+                            "╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝     \n" +
+                            "                                                                                                                                   \n" + Colors.RESET);
+                    input.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println(Colors.BRIGHT_RED + "Invalid option, please input correct one" + Colors.RESET);
+                    break;
+            }
+        } while (!selectedOption.equals("0"));
     }
 
+    private static void showShipDemonstration(Player handbook, Ship ship, GameManager game) {
+        handbook.createBattleshipBoard();
+        game.placeShipOnBoard(ship, handbook, new Coordinate(4, 4));
+        System.out.println();
+        System.out.println(Colors.BRIGHT_WHITE + "This is the " + ship.shipName + " placement\n" + Colors.RESET);
+        handbook.displayBattleshipBoard();
+        handbook.createBattleshipBoard();
+    }
 
     private static void playerPlay(Player player, GameManager game, String numberOfPlayer) {
         System.out.println(Colors.BRIGHT_BLUE + "\nPlayer " + numberOfPlayer + "\n" + Colors.RESET);
@@ -123,15 +166,19 @@ public class Main {
                 " ▀▀▀▀▀▀▀▀▀▀   ▀         ▀       ▀            ▀       ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀           \n" +
                 "                                                                                                                                  \n" + Colors.RESET);
 
-        System.out.println(Colors.CYAN + "     " + PLAYER_VS_PLAYER + "\n" +
+        System.out.println(Colors.BRIGHT_CYAN + "     " + PLAYER_VS_PLAYER + "\n" +
                 "╔═╗┬  ┌─┐┬ ┬┌─┐┬─┐  ╦  ╦╔═╗  ╔═╗┬  ┌─┐┬ ┬┌─┐┬─┐\n" +
                 "╠═╝│  ├─┤└┬┘├┤ ├┬┘  ╚╗╔╝╚═╗  ╠═╝│  ├─┤└┬┘├┤ ├┬┘\n" +
                 "╩  ┴─┘┴ ┴ ┴ └─┘┴└─   ╚╝ ╚═╝  ╩  ┴─┘┴ ┴ ┴ └─┘┴└─\n" + Colors.RESET);
-        System.out.println(Colors.CYAN + "     " + PLAYER_VS_COMPUTER + "\n" +
+        System.out.println(Colors.BRIGHT_CYAN + "     " + PLAYER_VS_COMPUTER + "\n" +
                 "╔═╗┬  ┌─┐┬ ┬┌─┐┬─┐  ╦  ╦╔═╗  ╔═╗╔═╗╦ ╦\n" +
                 "╠═╝│  ├─┤└┬┘├┤ ├┬┘  ╚╗╔╝╚═╗  ║  ╠═╝║ ║\n" +
                 "╩  ┴─┘┴ ┴ ┴ └─┘┴└─   ╚╝ ╚═╝  ╚═╝╩  ╚═╝\n" + Colors.RESET);
-        System.out.println(Colors.CYAN + "     " + EXIT_GAME + "\n" +
+        System.out.println(Colors.BRIGHT_CYAN + "     " + HAND_BOOK + "\n" +
+                "╦ ╦╔═╗╔╗╔╔╦╗╔╗ ╔═╗╔═╗╦╔═\n" +
+                "╠═╣╠═╣║║║ ║║╠╩╗║ ║║ ║╠╩╗\n" +
+                "╩ ╩╩ ╩╝╚╝═╩╝╚═╝╚═╝╚═╝╩ ╩\n" + Colors.RESET);
+        System.out.println(Colors.BRIGHT_CYAN + "     " + EXIT_GAME + "\n" +
                 "╔═╗─┐ ┬┬┌┬┐\n" +
                 "║╣ ┌┴┬┘│ │ \n" +
                 "╚═╝┴ └─┴ ┴ \n" + Colors.RESET);

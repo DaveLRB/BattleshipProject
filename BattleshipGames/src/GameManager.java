@@ -98,6 +98,10 @@ class GameManager {
         }
     }
 
+    public void placeShipOnBoard(Ship ship, Player player, Coordinate coordinate){
+        ship.placeShipHorizontally(player.getBoard(), coordinate);
+    }
+
     private void placeShip(Player player, Ship ship, String title) {
         //player.createBattleshipBoard(); test this outside, in order to see if it works
         System.out.println();
