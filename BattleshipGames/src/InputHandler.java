@@ -4,12 +4,14 @@ class InputHandler {
 
     public static String getCoordinateInput() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Please write a coordinate");
+        //System.out.println();
+        System.out.println(Colors.BRIGHT_WHITE + "\nPlease write a coordinate" + Colors.RESET);
         String userCoordinate = scan.nextLine();
+        System.out.println();
         if (isCoordinateValid(userCoordinate)) {
             return userCoordinate;
         } else {
-            System.out.println("Write a valid coordinate!");
+            System.out.println(Colors.BRIGHT_WHITE + "Write a valid coordinate!" + Colors.RESET);
         }
         return userCoordinate;
     }
@@ -18,24 +20,30 @@ class InputHandler {
         Coordinate coordinateInput = new Coordinate();
         do {
             Scanner scan = new Scanner(System.in);
-            System.out.println("Please write a coordinate");
+            System.out.println();
+            System.out.println(Colors.BRIGHT_WHITE +"Please write a coordinate" + Colors.RESET);
             String userCoordinate = scan.nextLine();
+            System.out.println();
             if (isCoordinateValid(userCoordinate)) {
                 coordinateInput = createCoordinate(userCoordinate);
                 if (!(isCoordinateAlreadyPlayed(coordinateInput, player.getBoard()))) {
                     return coordinateInput;
                 } else {
-                    System.out.println("Write a valid coordinate!");
+                    System.out.println();
+                    System.out.println(Colors.BRIGHT_WHITE + "Write a valid coordinate!" + Colors.RESET);
+                    System.out.println();
                 }
             } else {
-                System.out.println("Write a valid coordinate!");
+                System.out.println();
+                System.out.println(Colors.BRIGHT_WHITE + "Write a valid coordinate!" + Colors.RESET);
+                System.out.println();
             }
         } while (isCoordinateAlreadyPlayed(coordinateInput, player.getBoard()));
         return new Coordinate();
     }
 
     private static boolean isCoordinateAlreadyPlayed(Coordinate coordinateInput, String[][] board) {
-        if (board[coordinateInput.getRow()][coordinateInput.getColumn()].equals("𝐗") || board[coordinateInput.getRow()][coordinateInput.getColumn()].equals("💥")) {
+        if (board[coordinateInput.getRow()][coordinateInput.getColumn()].equals("❌") || board[coordinateInput.getRow()][coordinateInput.getColumn()].equals("💥")) {
             return true;
         }
         return false;
@@ -76,7 +84,7 @@ class InputHandler {
         Scanner scan = new Scanner(System.in);
         String chosenDirection;
         do {
-            System.out.println("Choose direction: [H] Horizontal or [V] Vertical");
+            System.out.println(Colors.BRIGHT_WHITE+"Choose direction:"+Colors.RESET+Colors.BRIGHT_CYAN+" [H] Horizontal or [V] Vertical" + Colors.RESET);
             chosenDirection = scan.nextLine().toUpperCase();
         } while (!chosenDirection.equals("H") && !chosenDirection.equals("V"));
         return chosenDirection;

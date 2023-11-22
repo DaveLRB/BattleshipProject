@@ -13,10 +13,10 @@ class Player {
     }
 
     public void displayBattleshipBoard() {
-        char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        String[] letters = {Colors.BRIGHT_BLUE + "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" + Colors.RESET};
         System.out.print("\t");
         for (int i = 0; i < SIZE_OF_ROWS_AND_COLUMNS; i++) {
-            System.out.print(i + 1 + "\t");
+            System.out.print(Colors.BRIGHT_BLUE + (Integer.toString(i + 1)) + "\t");
         }
         System.out.println();
 

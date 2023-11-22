@@ -4,15 +4,15 @@ import java.util.Random;
 
 class GameManager {
     protected static final String BOMB_SYMBOL = "💥";
-    protected static final String MISS_SYMBOL = "𝐗";
+    protected static final String MISS_SYMBOL = "❌";
     public void placeShipsManually(Player player) {
         player.createBattleshipBoard();
-        placeShip(player, new AircraftCarrier(), "Please, place the Carrier / it occupies 6 coordinates");
-        placeShip(player, new Battleship(), "Please, place the Battleship/ it occupies 5 coordinates");
-        placeShip(player, new Submarine(), "Please, place the Submarine / it occupies 4 coordinates");
-        placeShip(player, new Corvette(), "Please, place the Corvette / it occupies 4 coordinates");
-        placeShip(player, new Cruiser(), "Please, place the Cruiser / it occupies 3 coordinates");
-        placeShip(player, new Destroyer(), "Please, place the Destroyer / it occupies 2 coordinates");
+        placeShip(player, new AircraftCarrier(), Colors.BRIGHT_CYAN + "Please, place the Carrier / occupies 6 coordinates" + Colors.RESET);
+        placeShip(player, new Battleship(), Colors.BRIGHT_CYAN + "Please, place the Battleship/ occupies 5 coordinates"+ Colors.RESET);
+        placeShip(player, new Submarine(), Colors.BRIGHT_CYAN + "Please, place the Submarine / occupies 4 coordinates"+ Colors.RESET);
+        placeShip(player, new Corvette(), Colors.BRIGHT_CYAN + "Please, place the Corvette / occupies 4 coordinates"+ Colors.RESET);
+        placeShip(player, new Cruiser(), Colors.BRIGHT_CYAN + "Please, place the Cruiser / occupies 3 coordinates"+ Colors.RESET);
+        placeShip(player, new Destroyer(), Colors.BRIGHT_CYAN + "Please, place the Destroyer / occupies 2 coordinates"+ Colors.RESET);
         player.displayBattleshipBoard();
         player.createBattleshipBoard();
     }
@@ -35,9 +35,11 @@ class GameManager {
         boolean isAnyShipSunk= false;
         do{
             isThereShip=false;
-            System.out.println("It's time for Player "+ numberOfPlayer + " to play");
+            System.out.println();
+            System.out.println(Colors.BRIGHT_CYAN+ "Player "+ numberOfPlayer + " plays" + Colors.RESET);
+            System.out.println();
             if(isAnyShipSunk){
-                System.out.println("The "+ nameOfTheSunkShip+ " was sunk");
+                System.out.println("⚓️" +Colors.CYAN+ " The "+ nameOfTheSunkShip+ " was sunk" +Colors.RESET + "⚓️");
             }
             isAnyShipSunk=false;
             player.displayBattleshipBoard();
@@ -73,16 +75,17 @@ class GameManager {
         if (direction.equals("H")) {
             ship.placeShipHorizontally(player.getBoard(), coordinate);
             player.addShip(ship);
-            System.out.println(ship.getCoordinates());
+            //System.out.println(ship.getCoordinates());
         } else {
             ship.placeShipVertically(player.getBoard(), coordinate);
             player.addShip(ship);
-            System.out.println(ship.getCoordinates());
+            //System.out.println(ship.getCoordinates());
         }
     }
 
     private void placeShip(Player player, Ship ship, String title) {
         //player.createBattleshipBoard(); test this outside, in order to see if it works
+        System.out.println();
         player.displayBattleshipBoard();
         System.out.println();
         System.out.println(title);
@@ -92,7 +95,7 @@ class GameManager {
             String direction = InputHandler.getDirectionHorizontalOrVerticalInput();
             String userCoordinate = InputHandler.getCoordinateInput();
             coordinate = InputHandler.createCoordinate(userCoordinate);
-            System.out.println(coordinate);
+            //System.out.println(coordinate);
             System.out.println();
             isPlacementValid = direction.equals("H")
                     ? ship.isPlacingShipHorizontallyPossible(player.getBoard(), coordinate)
@@ -100,7 +103,7 @@ class GameManager {
             if (isPlacementValid) {
                 placeShipOnBoard(direction, ship, player, coordinate);
             } else {
-                System.out.println("error, invalid coordinate\n");
+                System.out.println(Colors.RED+ "Error, Invalid Coordinate\n"+Colors.RESET);
             }
         } while (!isPlacementValid);
         //player1.displayBattleshipBoard();
