@@ -13,7 +13,6 @@ public class Main {
         Player player2 = new Player();
         Player handbook = new Player();
         GameManager game = new GameManager();
-        GameManager demonstration = new GameManager();
 
         //Scanner input = new Scanner(System.in);
         String selectedOption;
