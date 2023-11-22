@@ -39,11 +39,15 @@ class GameManager {
             System.out.println(Colors.BRIGHT_CYAN + "Player " + numberOfPlayer + " plays" + Colors.RESET);
             System.out.println();
             if(isThereShip){
-                System.out.println("Shot hit");
+                System.out.println(Colors.BRIGHT_GREEN + "\n" +
+                        "╔═╗┬ ┬┌─┐┌┬┐  ╦ ╦┬┌┬┐\n" +
+                        "╚═╗├─┤│ │ │   ╠═╣│ │ \n" +
+                        "╚═╝┴ ┴└─┘ ┴   ╩ ╩┴ ┴ \n" + Colors.RESET);
             }
             isThereShip = false;
             if (isAnyShipSunk) {
-                System.out.println("⚓️" + Colors.CYAN + " The " + nameOfTheSunkShip + " was sunk" + Colors.RESET + "⚓️");
+                System.out.println("⚓️" + Colors.CYAN + " The " + nameOfTheSunkShip + " was sunk " + Colors.RESET + " ⚓️");
+                System.out.println();
             }
             isAnyShipSunk = false;
             player.displayBattleshipBoard();
@@ -73,7 +77,10 @@ class GameManager {
                 boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = MISS_SYMBOL;
             }
             if (!isThereShip) {
-                System.out.println("Missed shot");
+                System.out.println(Colors.BRIGHT_RED + "\n" +
+                        "╔╦╗┬┌─┐┌─┐┌─┐┌┬┐  ┌─┐┬ ┬┌─┐┌┬┐\n" +
+                        "║║║│└─┐└─┐├┤  ││  └─┐├─┤│ │ │ \n" +
+                        "╩ ╩┴└─┘└─┘└─┘─┴┘  └─┘┴ ┴└─┘ ┴ \n" + Colors.RESET);
                 player.displayBattleshipBoard();
             }
         } while (isThereShip && !player.isGameOver());
