@@ -38,6 +38,8 @@ class GameManager {
             System.out.println();
             System.out.println(Colors.BRIGHT_CYAN + "Player " + numberOfPlayer + " plays" + Colors.RESET);
             System.out.println();
+            System.out.println(Colors.BRIGHT_YELLOW + "Ships left: "+ player.getShips().size() + Colors.RESET);
+            System.out.println();
             if(isThereShip){
                 System.out.println(Colors.BRIGHT_GREEN + "\n" +
                         "╔═╗┬ ┬┌─┐┌┬┐  ╦ ╦┬┌┬┐\n" +

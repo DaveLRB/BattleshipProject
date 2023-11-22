@@ -75,15 +75,19 @@ public class Main {
                     showShipDemonstration(handbook, new Corvette(), game);
                     showShipDemonstration(handbook, new Cruiser(), game);
                     showShipDemonstration(handbook, new Destroyer(), game);
+                    System.out.println();
                     System.out.println(Colors.BRIGHT_WHITE + "1. Back to Starting Menu" + Colors.RESET);
-                    String userInput = input.nextLine();
-                    switch (userInput) {
-                        case "1":
-                            break;
-                        default:
-                            System.out.println(Colors.BRIGHT_RED + "Invalid option, please input correct one" + Colors.RESET);
-                            break;
-                    }
+                    String userInput;
+                    do {
+                        userInput = input.nextLine();
+                        switch (userInput) {
+                            case "1":
+                                break;
+                            default:
+                                System.out.println(Colors.BRIGHT_RED + "Invalid option, please input correct one" + Colors.RESET);
+                                break;
+                        }
+                    }while(!userInput.equals("1"));
                     break;
                 case EXIT_GAME:
                     System.out.println(Colors.BRIGHT_YELLOW + "\n" +
