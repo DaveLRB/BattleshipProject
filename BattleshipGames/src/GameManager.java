@@ -5,14 +5,15 @@ import java.util.Random;
 class GameManager {
     protected static final String BOMB_SYMBOL = "💥";
     protected static final String MISS_SYMBOL = "❌";
+
     public void placeShipsManually(Player player) {
         player.createBattleshipBoard();
         placeShip(player, new AircraftCarrier(), Colors.BRIGHT_CYAN + "Please, place the Carrier / occupies 6 coordinates" + Colors.RESET);
-        placeShip(player, new Battleship(), Colors.BRIGHT_CYAN + "Please, place the Battleship/ occupies 5 coordinates"+ Colors.RESET);
-        placeShip(player, new Submarine(), Colors.BRIGHT_CYAN + "Please, place the Submarine / occupies 4 coordinates"+ Colors.RESET);
-        placeShip(player, new Corvette(), Colors.BRIGHT_CYAN + "Please, place the Corvette / occupies 4 coordinates"+ Colors.RESET);
-        placeShip(player, new Cruiser(), Colors.BRIGHT_CYAN + "Please, place the Cruiser / occupies 3 coordinates"+ Colors.RESET);
-        placeShip(player, new Destroyer(), Colors.BRIGHT_CYAN + "Please, place the Destroyer / occupies 2 coordinates"+ Colors.RESET);
+        placeShip(player, new Battleship(), Colors.BRIGHT_CYAN + "Please, place the Battleship/ occupies 5 coordinates" + Colors.RESET);
+        placeShip(player, new Submarine(), Colors.BRIGHT_CYAN + "Please, place the Submarine / occupies 4 coordinates" + Colors.RESET);
+        placeShip(player, new Corvette(), Colors.BRIGHT_CYAN + "Please, place the Corvette / occupies 4 coordinates" + Colors.RESET);
+        placeShip(player, new Cruiser(), Colors.BRIGHT_CYAN + "Please, place the Cruiser / occupies 3 coordinates" + Colors.RESET);
+        placeShip(player, new Destroyer(), Colors.BRIGHT_CYAN + "Please, place the Destroyer / occupies 2 coordinates" + Colors.RESET);
         player.displayBattleshipBoard();
         player.createBattleshipBoard();
     }
@@ -29,46 +30,53 @@ class GameManager {
         player.createBattleshipBoard();
     }
 
-    public void playerShootsMissile(Player player, String[][] boardgame, String numberOfPlayer){
-        boolean isThereShip;
-        String nameOfTheSunkShip="";
-        boolean isAnyShipSunk= false;
-        do{
-            isThereShip=false;
+    public void playerShootsMissile(Player player, String[][] boardgame, String numberOfPlayer) {
+        boolean isThereShip=false;
+        String nameOfTheSunkShip = "";
+        boolean isAnyShipSunk = false;
+        do {
             System.out.println();
-            System.out.println(Colors.BRIGHT_CYAN+ "Player "+ numberOfPlayer + " plays" + Colors.RESET);
+            System.out.println(Colors.BRIGHT_CYAN + "Player " + numberOfPlayer + " plays" + Colors.RESET);
             System.out.println();
-            if(isAnyShipSunk){
-                System.out.println("⚓️" +Colors.CYAN+ " The "+ nameOfTheSunkShip+ " was sunk" +Colors.RESET + "⚓️");
+            if(isThereShip){
+                System.out.println("Shot hit");
             }
-            isAnyShipSunk=false;
+            isThereShip = false;
+            if (isAnyShipSunk) {
+                System.out.println("⚓️" + Colors.CYAN + " The " + nameOfTheSunkShip + " was sunk" + Colors.RESET + "⚓️");
+            }
+            isAnyShipSunk = false;
             player.displayBattleshipBoard();
-            Coordinate userCoordinate = InputHandler.getCoordinate(player);;
-            for(int i=0; i<player.getShips().size();i++){
-                ArrayList<Coordinate> shipCoordinates = player.getShips().get(i).coordinates;
-                for(int i1=0; i1<player.getShips().get(i).getCoordinates().size();i1++){
-                    if(player.getShips().get(i).getCoordinates().get(i1).toString().equals(userCoordinate.toString())){
+            Coordinate userCoordinate = InputHandler.getCoordinate(player);
+            ;
+            for (int i = 0; i < player.getShips().size(); i++) {
+                //ArrayList<Coordinate> shipCoordinates = player.getShips().get(i).coordinates;
+                for (int i1 = 0; i1 < player.getShips().get(i).getCoordinates().size(); i1++) {
+                    if (player.getShips().get(i).getCoordinates().get(i1).toString().equals(userCoordinate.toString())) {
                         player.getShips().get(i).getCoordinates().remove(player.getShips().get(i).getCoordinates().get(i1));
-                        boardgame[userCoordinate.getRow()][userCoordinate.getColumn()]=BOMB_SYMBOL;
-                        isThereShip=true;
+                        boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = BOMB_SYMBOL;
+                        isThereShip = true;
                         break;
                     }
                 }
             }
-            if(player.isAnyShipSunk()){
-                isAnyShipSunk=true;
-                nameOfTheSunkShip= player.getNameOfSunkShip();
+            if (player.isAnyShipSunk()) {
+                isAnyShipSunk = true;
+                nameOfTheSunkShip = player.getNameOfSunkShip();
                 player.removeSunkShip();
             }
             //problems with player.isAnyShipsSunk/ it isn't properly removing the ships and coordinates
             //get the name of the ship before eliminating it RIGHT HERE.
             //I need to eliminate the ship at the right time and keep the name
 
-            if(!isThereShip){
-                boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = MISS_SYMBOL ;
+            if (!isThereShip) {
+                boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = MISS_SYMBOL;
             }
-            player.displayBattleshipBoard();
-        }while(isThereShip && !player.isGameOver());
+            if (!isThereShip) {
+                System.out.println("Missed shot");
+                player.displayBattleshipBoard();
+            }
+        } while (isThereShip && !player.isGameOver());
     }
 
     private void placeShipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
@@ -103,7 +111,7 @@ class GameManager {
             if (isPlacementValid) {
                 placeShipOnBoard(direction, ship, player, coordinate);
             } else {
-                System.out.println(Colors.RED+ "Error, Invalid Coordinate\n"+Colors.RESET);
+                System.out.println(Colors.RED + "Error, Invalid Coordinate\n" + Colors.RESET);
             }
         } while (!isPlacementValid);
         //player1.displayBattleshipBoard();
