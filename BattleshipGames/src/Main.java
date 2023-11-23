@@ -73,6 +73,7 @@ public class Main {
                         playerVersusComputerGame.playerShootsMissile(player3, player3.getBoard());
                         if (player3.isGameOver()) {
                             //put here SYSTEM OUT OF COMPUTER WINS
+
                         }
                         //put here the random shot method
                     } while (!(player3.isGameOver()) && !(computerPlayer.isGameOver()));

@@ -30,7 +30,7 @@ class GameManager {
         player.createBattleshipBoard();
     }
 
-    public void placeShipsRandomlyForComputer(Player player){
+    public void placeShipsRandomlyForComputer(Player player) {
         player.createBattleshipBoard();
         placeShipRandomly(player, new AircraftCarrier());
         placeShipRandomly(player, new Battleship());
@@ -101,12 +101,15 @@ class GameManager {
         boolean isThereShip = false;
         boolean isAnyShipSunk = false;
         String nameOfTheSunkShip = "";
-        boolean needsToRepeat;
+        boolean needsToRepeat = false;
         do {
-            System.out.println();
-            System.out.println(Colors.BRIGHT_CYAN + "Computer plays" + Colors.RESET);
-            System.out.println();
-            System.out.println(Colors.BRIGHT_YELLOW + "Ships left: " + player.getShips().size() + Colors.RESET);
+            if (!needsToRepeat && !isThereShip) {
+                System.out.println();
+                System.out.println(Colors.BRIGHT_CYAN + "Computer plays" + Colors.RESET);
+                System.out.println();
+                System.out.println(Colors.BRIGHT_YELLOW + "Ships left: " + player.getShips().size() + Colors.RESET);
+            }
+
             if (isThereShip) {
                 System.out.println(Colors.BRIGHT_GREEN + "\n" +
                         "╔═╗┬ ┬┌─┐┌┬┐  ╦ ╦┬┌┬┐\n" +
@@ -120,17 +123,17 @@ class GameManager {
                 System.out.println();
             }
             isAnyShipSunk = false;
-            needsToRepeat=false;
+            needsToRepeat = false;
             Coordinate userCoordinate = new Coordinate(random.nextInt(10), random.nextInt(10));
             for (int i = 0; i < player.getShips().size(); i++) {
                 //ArrayList<Coordinate> shipCoordinates = player.getShips().get(i).coordinates;
                 for (int i1 = 0; i1 < player.getShips().get(i).getCoordinates().size(); i1++) {
                     if (player.getShips().get(i).getCoordinates().get(i1).toString().equals(userCoordinate.toString())) {
                         player.getShips().get(i).getCoordinates().remove(player.getShips().get(i).getCoordinates().get(i1));
-                        if(boardgame[userCoordinate.getRow()][userCoordinate.getColumn()].equals(BOMB_SYMBOL)){
+                        if (boardgame[userCoordinate.getRow()][userCoordinate.getColumn()].equals(BOMB_SYMBOL)) {
                             needsToRepeat = true;
-                        }else{
-                            boardgame[userCoordinate.getRow()][userCoordinate.getColumn()]=BOMB_SYMBOL;
+                        } else {
+                            boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = BOMB_SYMBOL;
                         }
                         isThereShip = true;
                         break;
@@ -143,20 +146,20 @@ class GameManager {
                 player.removeSunkShip();
             }
             if (!isThereShip) {
-                if(boardgame[userCoordinate.getRow()][userCoordinate.getColumn()].equals(MISS_SYMBOL)){
-                    needsToRepeat=true;
-                }else{
+                if (boardgame[userCoordinate.getRow()][userCoordinate.getColumn()].equals(MISS_SYMBOL)) {
+                    needsToRepeat = true;
+                } else {
                     boardgame[userCoordinate.getRow()][userCoordinate.getColumn()] = MISS_SYMBOL;
                 }
             }
-            if (!isThereShip) {
+            if (!isThereShip && !needsToRepeat) {
                 System.out.println(Colors.BRIGHT_RED + "\n" +
                         "╔╦╗┬┌─┐┌─┐┌─┐┌┬┐  ┌─┐┬ ┬┌─┐┌┬┐\n" +
                         "║║║│└─┐└─┐├┤  ││  └─┐├─┤│ │ │ \n" +
                         "╩ ╩┴└─┘└─┘└─┘─┴┘  └─┘┴ ┴└─┘ ┴ \n" + Colors.RESET);
                 player.displayBattleshipBoard();
             }
-        } while (isThereShip && !player.isGameOver() && !needsToRepeat);
+        } while ((isThereShip && !player.isGameOver()) || needsToRepeat);
     }
 
     private void placeShipOnBoard(String direction, Ship ship, Player player, Coordinate coordinate) {
