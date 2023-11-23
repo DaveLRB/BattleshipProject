@@ -178,7 +178,7 @@ public class Main {
                 game.placeShipsRandomly(player);
                 String choiceInput;
                 do {
-                    System.out.println(Colors.BRIGHT_WHITE + "\n1. Continue\n2. Redo Randomizer\n" + Colors.RESET);
+                    System.out.println(Colors.BRIGHT_WHITE + "\n1. Continue\nPress Any Key to Redo Randomizer\n" + Colors.RESET);
                     //input.nextLine();
                     System.out.print(Colors.BRIGHT_WHITE + "\nChoose: " + Colors.RESET);
                     choiceInput = scan.nextLine();
